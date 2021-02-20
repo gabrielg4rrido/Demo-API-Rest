@@ -16,7 +16,7 @@ public class PostResource {
 
 	@Autowired
 	private PostService service;
-
+	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Post> findById(@PathVariable String id) {
 		Post post = service.findById(id);

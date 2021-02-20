@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.garrido.api.domain.Post;
 import com.garrido.api.domain.User;
 import com.garrido.api.dto.AuthorDTO;
+import com.garrido.api.dto.CommentDTO;
 import com.garrido.api.repository.PostRepository;
 import com.garrido.api.repository.UserRepository;
 
@@ -41,6 +42,12 @@ public class Instantiation implements CommandLineRunner {
 		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem!", "Vou viajar para SP, abraços.", new AuthorDTO(gabriel));
 		Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia!", "Acordei feliz hoje!", new AuthorDTO(giulia));
 		Post post3 = new Post(null, sdf.parse("08/10/2018"), "Aniversário do boy!", "Te amo baby!", new AuthorDTO(giulia));
+		
+		CommentDTO c1 = new CommentDTO("Boa viagem maninho!", sdf.parse("21/03/2018"), new AuthorDTO(livia));
+		CommentDTO c2 = new CommentDTO("Te amo vida!", sdf.parse("08/10/2018"), new AuthorDTO(gabriel));
+		
+		post1.getComments().add(c1);
+		post3.getComments().add(c2);
 		
 		postRepository.saveAll(Arrays.asList(post1, post2, post3));
 		
