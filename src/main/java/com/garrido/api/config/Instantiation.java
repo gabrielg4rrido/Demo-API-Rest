@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.garrido.api.domain.Post;
 import com.garrido.api.domain.User;
+import com.garrido.api.dto.AuthorDTO;
 import com.garrido.api.repository.PostRepository;
 import com.garrido.api.repository.UserRepository;
 
@@ -34,15 +35,13 @@ public class Instantiation implements CommandLineRunner {
 		User gabriel = new User(null, "Gabriel Garrido", "gabriel@gmail.com");
 		User giulia = new User(null, "Giulia Boechat", "giulia@gmail.com");
 		User livia = new User(null, "Livia Garrido", "livia@gmail.com");
-	
-		
-		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem!", "Vou viajar para SP, abraços.", gabriel);
-		Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia!", "Acordei feliz hoje!", giulia);
-		Post post3 = new Post(null, sdf.parse("08/10/2018"), "Aniversário do boy!", "Te amo baby!", giulia);
 		
 		userRepository.saveAll(Arrays.asList(gabriel, giulia, livia));
-		postRepository.saveAll(Arrays.asList(post1, post2, post3));
 		
+		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem!", "Vou viajar para SP, abraços.", new AuthorDTO(gabriel));
+		Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia!", "Acordei feliz hoje!", new AuthorDTO(giulia));
+		Post post3 = new Post(null, sdf.parse("08/10/2018"), "Aniversário do boy!", "Te amo baby!", new AuthorDTO(giulia));
+		
+		postRepository.saveAll(Arrays.asList(post1, post2, post3));
 	}
-
 }
