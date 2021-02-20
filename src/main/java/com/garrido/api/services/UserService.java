@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.garrido.api.domain.User;
+import com.garrido.api.dto.UserDTO;
 import com.garrido.api.repository.UserRepository;
 import com.garrido.api.services.exception.ObjectNotFoundException;
 
@@ -24,5 +25,13 @@ public class UserService {
 		Optional<User> user = repository.findById(id);
 		
 		return user.orElseThrow(() -> new ObjectNotFoundException("Error! Object not found!"));
+	}
+	
+	public User insertUser(User user) {
+		return repository.insert(user);
+	}
+	
+	public User createUserFromDTO(UserDTO userDTO) {
+		return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
 	}
 }
